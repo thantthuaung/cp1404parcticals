@@ -31,7 +31,7 @@ def main():
             calculate_fahrenheit_to_celsius()
         else:
             print("Invalid option")
-        print(MENU)
+        print("C - Convert Celsius to Fahrenheit\nF - Convert Fahrenheit to Celsius\nQ - Quit")
         choice = input(">>> ").upper()
     print("Thank you.")
 main()
