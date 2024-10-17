@@ -10,6 +10,7 @@ print(CODE_TO_NAME)
 short_name_width = max(len(key) for key in CODE_TO_NAME.keys())
 for key, value in CODE_TO_NAME.items():
     print(f"{key:{short_name_width}} is {value}")
+
 while True:
     try:
         state_code = input("Enter short state: ").upper()
