@@ -43,14 +43,18 @@
 #     print()
 
 
-data = [['Derek', 7],['Xavier', 80], ['Bob', 612], ['Chantanelle', 9]]
-name_width = max((len(pair[0]) for pair in data))
-score_width = max((len(str(pair[1])) for pair in data))
-
-for pair in data:
-    name, score = pair
-    print(f"{name:{name_width}} = {score:{score_width}}")
+# data = [['Derek', 7],['Xavier', 80], ['Bob', 612], ['Chantanelle', 9]]
+# name_width = max((len(pair[0]) for pair in data))
+# score_width = max((len(str(pair[1])) for pair in data))
+#
+# for pair in data:
+#     name, score = pair
+#     print(f"{name:{name_width}} = {score:{score_width}}")
 # for i in data:
 #     for j in i:
 #         print(f"{j} = ")
 # print()
+
+parts = [['CP1401', 'Ada Lovelace', 192], ['CP1404', 'Alan Turing', 98], ['CP4321', 'Bill Gates', 676], ['CP1234', 'Steve Jobs', 123]]
+print(f"{str(part[0])} is taught by {str(part[1])} and has {str(part[3])} students" for part in parts)
+print(repr(part) for part in parts)
