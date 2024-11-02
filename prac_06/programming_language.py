@@ -11,8 +11,9 @@ class ProgrammingLanguage:
         self.typing = typing
         self.reflection = reflection
         self.year = year
+
     def is_dynamic(self):
-        if self.typing == "Dynamic":
-            return True
-        else:
-            return False
+        return self.typing == "Dynamic"
+
+    def __str__(self):
+        return f"{self.language_name}, {self.typing} typing, Reflection={self.reflection}, First appeared in {self.year}"
