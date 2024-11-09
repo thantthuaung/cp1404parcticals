@@ -56,7 +56,22 @@ def main():
             pass
 
         elif choice == UPDATE:
-            pass
+            display_the_projects(projects)
+            project_choice = int(input("Project choice: "))
+            print(projects[project_choice])
+            new_percentage = input("New Percentage: ")
+            if new_percentage != "":
+                for project in projects:
+                    if projects.index(project) == project_choice:
+                        project.update_percentage(int(new_percentage))
+                new_priority = input("New Priority: ")
+                if new_priority != "":
+                    for project in projects:
+                        if projects.index(project) == project_choice:
+                            project.update_priority(int(new_priority))
+
+            print(f"{MENU}")
+            choice = input(">>> ").lower()
 
 
 def group_complete_and_incomplete(projects):
@@ -86,8 +101,10 @@ def load_txt_file(projects):
 
 
 def display_the_projects(works):
+    label = ZERO
     for work in works:
-        print(f"\t{work}")
+        label += ONE
+        print(f"\t{label-ONE} {work}")
 
 
 main()
