@@ -6,5 +6,16 @@ class Project:
         self.cost_estimate = cost_estimate
         self.percentage = percentage
 
+    def __lt__(self, other):
+        return self.priority < other.priority
+
+    def update_percentage(self, new_percentage):
+        self.percentage = new_percentage
+
+    def update_priority(self, new_priority):
+        self.priority = new_priority
+
+
     def __str__(self):
-        return f"{self.name}, start: {self.start_date}, priority {self.priority}, setimate: ${self.cost_estimate:.2f}, completion: {self.percentage}"
+        return f"{self.name}, start: {self.start_date}, priority {self.priority}, setimate: ${self.cost_estimate:.2f}, completion: {self.percentage}%"
+
