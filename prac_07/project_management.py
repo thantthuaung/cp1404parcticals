@@ -4,6 +4,7 @@ time estimate - 1 hour
 """
 from prac_07.project import Project
 import datetime
+from operator import itemgetter
 
 FILE_NAME = "projects.txt"
 MENU = """- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date\n- (A)dd new project\n- (U)pdate project\n- (Q)uit"""
@@ -30,10 +31,18 @@ def main():
     choice = input(">>> ").lower()
     while choice != QUIT:
         if choice == LOAD:
-            pass
+            projects.clear()
+            count = load_txt_file(projects)
+            print(f"{MENU}")
+            choice = input(">>> ").lower()
 
         elif choice == SAVE:
-            pass
+            yes_or_no = input("Would you like to save to projects.txt? ")
+            if yes_or_no == "yes":
+                out_file = save_project(projects)
+                out_file.close()
+            print(f"{MENU}")
+            choice = input(">>> ").lower()
 
         elif choice == DISPLAY:
             complete_project, incomplete_project = group_complete_and_incomplete(projects)
@@ -45,7 +54,14 @@ def main():
             choice = input(">>> ").lower()
 
         elif choice == FILTER:
-            pass
+            date_string = input("Show project that start date (d/m/yyyy): ")  # e.g., "30/9/2022"
+            date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+            filtered_projects = [project for project in projects if project.start_date >= date]
+            filtered_projects = sorted(filtered_projects, key=lambda x: x.start_date)
+            for project in filtered_projects:
+                print(project)
+            print(f"{MENU}")
+            choice = input(">>> ").lower()
 
         elif choice == ADD:
             print("Let's add new project")
@@ -53,7 +69,7 @@ def main():
             date_string = input("Date (d/m/yyyy): ")  # e.g., "30/9/2022"
             date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
             priority = int(input("Priority: "))
-            cost = float(input("COst estimate: $"))
+            cost = float(input("Cost estimate: $"))
             percentage = int(input("Percent complete: "))
             new_project = Project(name, date.strftime("%d/%m/%Y"), priority, cost, percentage)
             projects.append(new_project)
@@ -77,6 +93,20 @@ def main():
 
             print(f"{MENU}")
             choice = input(">>> ").lower()
+    yes_or_no = input("Would you like to save to projects.txt? ")
+    if yes_or_no == "yes":
+        out_file = save_project(projects)
+        out_file.close()
+        print("Thank you for using custom-built project management software.")
+
+
+def save_project(projects):
+    out_file = open(FILE_NAME, "w")
+    out_file.write("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage\n")
+    for project in projects:
+        out_file.write(
+            f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t{project.percentage}\n")
+    return out_file
 
 
 def group_complete_and_incomplete(projects):
@@ -109,7 +139,7 @@ def display_the_projects(works):
     label = ZERO
     for work in works:
         label += ONE
-        print(f"\t{label-ONE} {work}")
+        print(f"\t{label - ONE} {work}")
 
 
 main()
