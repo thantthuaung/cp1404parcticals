@@ -22,11 +22,6 @@ FOUR = 4
 HUNDRED = 100
 
 
-# date_string = input("Date (d/m/yyyy): ")  # e.g., "30/9/2022"
-# date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
-# print(f"That day is/was {date.strftime('%A')}")
-# print(date.strftime("%d/%m/%Y"))
-
 def main():
     projects = []
     print("Welcome to Pythonic Project Management")
@@ -53,7 +48,17 @@ def main():
             pass
 
         elif choice == ADD:
-            pass
+            print("Let's add new project")
+            name = input("Name: ")
+            date_string = input("Date (d/m/yyyy): ")  # e.g., "30/9/2022"
+            date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+            priority = int(input("Priority: "))
+            cost = float(input("COst estimate: $"))
+            percentage = int(input("Percent complete: "))
+            new_project = Project(name, date.strftime("%d/%m/%Y"), priority, cost, percentage)
+            projects.append(new_project)
+            print(f"{MENU}")
+            choice = input(">>> ").lower()
 
         elif choice == UPDATE:
             display_the_projects(projects)
