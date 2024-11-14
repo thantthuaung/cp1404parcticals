@@ -12,8 +12,28 @@
 #     with open(name, "w") as out_file:
 #         print(name, file=out_file)
 
-file_name = "counrty_name.txt"
-with open(file_name, "r") as in_file:
-    for line in (0, file_name, 2):
-        print(f"{in_file.readline().strip()} was born in {in_file.readline().strip()}")
+class Monitor:
+    def __init__(self, model: str, width: int, height: int):
+        self.model = model
+        self.width = width
+        self.height = height
+
+    def get_resolution(self) -> tuple:
+        return self.width, self.height
+
+    def get_total_pixels(self):
+        return self.width * self.height
+
+    def __eq__(self, other):
+        return self.width == other.width and self.height == other.height
+
+    def __str__(self):
+        return f"{self.model} has {self.get_total_pixels()} {self.get_resolution()} resolution"
+
+
+model1 = Monitor("mac", 1080, 2080)
+print(model1)
+model2 = Monitor("other", 1080, 2080)
+print(model2)
+print(model1 == model2)
 
