@@ -1,6 +1,6 @@
 from prac_09.taxi import Taxi
 
-my_taxi = Taxi("Prius 1", 100, 1.23)
+my_taxi = Taxi("Prius 1", 100)
 distance = my_taxi.drive(40)
 price = my_taxi.get_fare()
 print(f"{my_taxi} and ${price}")
