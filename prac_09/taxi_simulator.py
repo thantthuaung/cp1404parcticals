@@ -14,24 +14,10 @@ def main():
     choice = input(">>> ").lower()
     while choice != "q":
         if choice == "c":
-            print(f"Taxis available:\n" + "\n".join([f"{i} - {taxi}" for i, taxi in enumerate(taxis)]))
-            taxi_choice = int(input(">>> "))
-            try:
-                current_taxi = taxis[taxi_choice]
-
-            except:
-                print("Invalid taxi choice")
+            current_taxi = choice_c(current_taxi, taxis)
 
         elif choice == "d":
-            if current_taxi is None:
-                print("You need to choose a taxi before you can drive")
-            else:
-                current_taxi.start_fare()
-                distance = float(input("Drive how far? "))
-                current_taxi.drive(distance)
-                cost = current_taxi.get_fare()
-                print(f"Your {current_taxi.name} trip cost you ${cost}")
-                total_bill += cost
+            total_bill = choice_d(current_taxi, total_bill)
 
         else:
             print("Invalid option")
@@ -41,6 +27,30 @@ def main():
         choice = input(">>> ").lower()
 
     print(f"Bill to date: ${total_bill:.2f}\nTaxis are now:\n" + "\n".join([f"{i} - {taxi}" for i, taxi in enumerate(taxis)]))
+
+
+def choice_d(current_taxi, total_bill):
+    if current_taxi is None:
+        print("You need to choose a taxi before you can drive")
+    else:
+        current_taxi.start_fare()
+        distance = float(input("Drive how far? "))
+        current_taxi.drive(distance)
+        cost = current_taxi.get_fare()
+        print(f"Your {current_taxi.name} trip cost you ${cost}")
+        total_bill += cost
+    return total_bill
+
+
+def choice_c(current_taxi, taxis):
+    print(f"Taxis available:\n" + "\n".join([f"{i} - {taxi}" for i, taxi in enumerate(taxis)]))
+    taxi_choice = int(input(">>> "))
+    try:
+        current_taxi = taxis[taxi_choice]
+
+    except:
+        print("Invalid taxi choice")
+    return current_taxi
 
 
 main()
