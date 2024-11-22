@@ -14,7 +14,13 @@ def main():
     choice = input(">>> ").lower()
     while choice != "q":
         if choice == "c":
-            pass
+            print(f"Taxis available:\n" + "\n".join([f"{i} - {taxi}" for i, taxi in enumerate(taxis)]))
+            taxi_choice = int(input(">>> "))
+            try:
+                current_taxi = taxis[taxi_choice]
+
+            except:
+                print("Invalid taxi choice")
 
         elif choice == "d":
             pass
