@@ -23,7 +23,15 @@ def main():
                 print("Invalid taxi choice")
 
         elif choice == "d":
-            pass
+            if current_taxi is None:
+                print("You need to choose a taxi before you can drive")
+            else:
+                current_taxi.start_fare()
+                distance = float(input("Drive how far? "))
+                current_taxi.drive(distance)
+                cost = current_taxi.get_fare()
+                print(f"Your {current_taxi.name} trip cost you ${cost}")
+                total_bill += cost
 
         else:
             print("Invalid option")
